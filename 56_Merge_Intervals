@@ -1,0 +1,15 @@
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        # sort intervals by start
+        intervals.sort()
+        merged = []
+        idx = 0
+        for i in intervals:
+            if len(merged)==0:
+                merged.append(i)
+            elif min(i) in list(range(merged[idx][0], merged[idx][1]+1)):
+                merged[idx][1] = max(i[1], merged[idx][1])
+            else:
+                merged.append(i)
+                idx += 1
+        return merged
